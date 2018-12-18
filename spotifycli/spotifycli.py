@@ -28,11 +28,11 @@ def main():
     elif args.song:
         show_song()
     elif args.songshort:
-        show_song_short()
+        show_song_short(args.songshort)
     elif args.artist:
         show_artist()
     elif args.artistshort:
-        show_artist_short()
+        show_artist_short(args.artistshort)
     elif args.album:
         show_album()
     elif args.playbackstatus:
@@ -76,6 +76,20 @@ def add_arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     for argument in get_arguments():
         parser.add_argument(argument[0], help=argument[1], action="store_true")
+    parser.add_argument(
+        "--songshort",
+        help="shows the song name in a short way (default: 10)",
+        nargs='?',
+        type=int,
+        const=10,
+        metavar='SONG_LEN')
+    parser.add_argument(
+        "--artistshort",
+        help="shows artist name in a short way (default: 15)",
+        nargs='?',
+        type=int,
+        const=15,
+        metavar='ARTIST_LEN')
     parser.add_argument("--client", action="store", dest="client",
                         help="sets client's dbus name", default="spotify")
     return parser.parse_args()
@@ -87,9 +101,7 @@ def get_arguments():
         ("--status", "shows song name and artist"),
         ("--statusshort", "shows status in a short way"),
         ("--song", "shows the song name"),
-        ("--songshort", "shows the song name in a short way"),
         ("--artist", "shows artist name"),
-        ("--artistshort", "shows artist name in a short way"),
         ("--album", "shows album name"),
         ("--arturl", "shows album image url"),
         ("--playbackstatus", "shows playback status"),
@@ -130,9 +142,9 @@ def show_song():
     print(f'{title}')
 
 
-def show_song_short():
+def show_song_short(length):
     _, title = get_song()
-    title = title[:10] + (title[10:] and '...')
+    title = title[:length] + (title[length:] and '...')
     print(f'{title}')
 
 
@@ -151,9 +163,9 @@ def show_artist():
     print(f'{artist}')
 
 
-def show_artist_short():
+def show_artist_short(length):
     artist, _ = get_song()
-    artist = artist[:15] + (artist[15:] and '...')
+    artist = artist[:length] + (artist[length:] and '...')
     print(f'{artist}')
 
 

@@ -1,3 +1,6 @@
+This fork implements the possibility to trim the song title and artist name to a specific length.
+Sadly the PR for this got rejected: [pwittchen/tmux-plugin-spotify#2](https://github.com/pwittchen/tmux-plugin-spotify/pull/2#issuecomment-447658812)
+
 # spotify-cli-linux
 
 [![Build Status](https://img.shields.io/travis/pwittchen/spotify-cli-linux.svg?branch=master&style=flat-square)](https://travis-ci.org/pwittchen/spotify-cli-linux) [![Version](https://img.shields.io/pypi/v/spotify-cli-linux.svg?style=flat-square)](https://pypi.python.org/pypi/spotify-cli-linux/) [![Python versions](https://img.shields.io/pypi/pyversions/spotify-cli-linux.svg?style=flat-square)](https://pypi.python.org/pypi/spotify-cli-linux/)
@@ -53,9 +56,11 @@ use one of the following parameters:
 --status          shows song name and artist
 --statusshort     shows status in a short way
 --song            shows the song name
---songshort       shows the song name in a short way
+--songshort [SONG_LEN]
+                  shows the song name in a short way (default: 10)
 --artist          shows artists name
---artistshort     shows artist name in a short way
+--artistshort [ARTIST_LEN]
+                  shows artist name in a short way (default: 15)
 --album           shows album name
 --arturl          shows album image url
 --lyrics          shows lyrics for the song playing

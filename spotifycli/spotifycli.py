@@ -144,7 +144,8 @@ def show_song():
 
 def show_song_short(length):
     _, title = get_song()
-    title = title[:length] + (title[length:] and '...')
+    if len(title) > length + 3:
+        title = title[:length] + '...'
     print(f'{title}')
 
 
@@ -165,7 +166,8 @@ def show_artist():
 
 def show_artist_short(length):
     artist, _ = get_song()
-    artist = artist[:length] + (artist[length:] and '...')
+    if len(artist) > length + 3:
+        artist = artist[:length] + '...'
     print(f'{artist}')
 
 
